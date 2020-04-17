@@ -104,7 +104,10 @@ public class CredentialForm extends FormLayout{
 		UserCredentials userCredentials = dataBinder.getBean();
 		if(userCredentials == null) {
 			System.out.println("Null from form delete.");
-		}          
+		}   
+		else if(userCredentials.getId()== 0) {//delete tried in create new credential form
+			System.out.println("Credential is not yet created.");
+		}
 		else {
 			System.out.println(userCredentials.getId());
 			System.out.println(userCredentialService.findCredentialById(userCredentials.getId()).getId());
