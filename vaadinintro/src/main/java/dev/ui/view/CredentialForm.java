@@ -17,6 +17,10 @@ import dev.ui.entity.UserCredentials;
 import dev.ui.service.UserCredentialService;
 
 public class CredentialForm extends FormLayout{
+//	@Inject
+//	private SecurityUtil securityUtil;
+	
+	
 	
 	private UserCredentialService userCredentialService;
 	
@@ -58,17 +62,14 @@ public class CredentialForm extends FormLayout{
 		//null is used to render the Id value as non-editable ; there is no setter method 
 		dataBinder.forField(this.textFieldId).withConverter(new StringToIntegerConverter(Integer.valueOf(0), "Integer Only")).bind(UserCredentials::getId, null);
 //		dataBinder.forField(this.textFieldId).withNullRepresentation("");
-		
-		
+				
 		this.add(formComponents,buttons);
 //		this.add(textFieldId,textFieldUserName,passwordField,birthDate,buttons);
 		dataBinder.bindInstanceFields(this);
 		saveButton.addClickListener(event -> saveCredential());
 		deleteButton.addClickListener(event -> deleteCredential());
-		resetButton.addClickListener(event -> resetCredential());
-		
+		resetButton.addClickListener(event -> resetCredential());		
 	}
-	
 	
 	public void setCredentials(UserCredentials userCredentials) {
 		dataBinder.setBean(userCredentials);
@@ -88,14 +89,15 @@ public class CredentialForm extends FormLayout{
 		if(userCredentials == null) {
 			System.out.println("Null from form save.");
 		}
-		if(userCredentials.getId( )== null || userCredentials.getId()==0) {
-			System.out.println("creating new");
-			userCredentialService.createCredential(userCredentials);
-		}
-		else {
-			System.out.println("new value:"+userCredentials.getId()+" "+userCredentials.getUserName()+" "+userCredentials.getPassword()+" "+userCredentials.getBirthDate());
-			userCredentialService.updateCredential(userCredentials);
-		}
+//		if(userCredentials.getId( )== null || userCredentials.getId() == 0) {
+//			System.out.println("creating new");
+//			userCredentialService.createCredential(userCredentials);
+//		}
+//		else {
+//			System.out.println("new value:"+userCredentials.getId()+" "+userCredentials.getUserName()+" "+userCredentials.getPassword()+" "+userCredentials.getBirthDate());
+//			userCredentialService.updateCredential(userCredentials);
+//		}
+		userCredentialService.createOrUpdateRegisteredUser(userCredentials);
 		this.mainView.updatelist();
 		this.setCredentials(null);
 	}

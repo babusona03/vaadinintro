@@ -103,21 +103,35 @@
             <version>8.0</version>
             <scope>provided</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
-<!-- <dependency> -->
-<!--     <groupId>javax.servlet</groupId> -->
-<!--     <artifactId>javax.servlet-api</artifactId> -->
-<!--     <version>4.0.1</version> -->
-<!--     <scope>provided</scope> -->
-<!-- </dependency> -->
-        
+       
+       <!-- 		[the following dependencies are for the security framework] -->
+		<dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.0</version>
+        </dependency>
 
-        <!-- Added to provide logging output as Flow uses -->
-        <!-- the unbound SLF4J no-operation (NOP) logger implementation -->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-core</artifactId>
+            <version>1.4.0</version>
+        </dependency>
+        
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
+            <scope>test</scope>
         </dependency>
+
+<!-- 		[********************] 			--> 
+
+        <!-- Added to provide logging output as Flow uses -->
+        <!-- the unbound SLF4J no-operation (NOP) logger implementation -->
+        
+<!--         <dependency> -->
+<!--             <groupId>org.slf4j</groupId> -->
+<!--             <artifactId>slf4j-simple</artifactId> -->
+<!--         </dependency> -->
 
         <dependency>
             <groupId>com.vaadin</groupId>
