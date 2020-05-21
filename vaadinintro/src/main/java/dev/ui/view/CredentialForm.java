@@ -97,6 +97,10 @@ public class CredentialForm extends FormLayout{
 //			System.out.println("new value:"+userCredentials.getId()+" "+userCredentials.getUserName()+" "+userCredentials.getPassword()+" "+userCredentials.getBirthDate());
 //			userCredentialService.updateCredential(userCredentials);
 //		}
+		//a different approach is followed here
+		//the userCredential bean is forwarded to the service class method
+		//that takes into account whether to update or create a new credential based on the status of the id value.
+		//
 		userCredentialService.createOrUpdateRegisteredUser(userCredentials);
 		this.mainView.updatelist();
 		this.setCredentials(null);

@@ -85,14 +85,29 @@ public class UserCredentialService {
 		credentialMap = null;
 	}
 	
-	/*
+	
 	public boolean authenticateUser(String userName,String clearTextPassword) {
-		UserCredentials userCredentials = entityManager.createNamedQuery(UserCredentials.FIND_USER_BY_UNAME,UserCredentials.class).setParameter("username",userName.toLowerCase()).getResultList().get(0);
+//		UserCredentials userCredentials = entityManager.createNamedQuery(UserCredentials.FIND_USER_BY_UNAME,UserCredentials.class).setParameter("username",userName.toLowerCase()).getResultList().get(0);
+		//now if the username provided is invalid, getresultlist() will contain null and getresultlist().get(0) will throw NPE
+		
+		//step 1 : check validity of username
+		UserCredentials userCredentials;
+		List<UserCredentials> queryResult = entityManager.createNamedQuery(UserCredentials.FIND_USER_BY_UNAME,UserCredentials.class).setParameter("username", userName.toLowerCase()).getResultList();
+		//check if the username provided is valid.otherwise the queryResult will contain null.
+		if(queryResult.size()!=0) {
+			userCredentials = queryResult.get(0);
+			return securityUtil.matchPassword(userCredentials.getPassword(),userCredentials.getSalt(), clearTextPassword);
+		}
+		else {
+			return false;
+		}
+		
+		//step 2 : check validity of password. here it is known that the user with the given username exists.
 		//non-null value implies that user exists with given mail id
 		//next step is to validate user's password 
-		if(userCredentials!=null) {
-			return securityUtil.matchPassword(userCredentials.getPassword(),userCredentials.getSalt(), clearTextPassword);
-		}		
-			return false;
-	}*/
+//		if(userCredentials!=null) {// this check is redundant.it is already determined that there exists one userCredential object.
+//			return securityUtil.matchPassword(userCredentials.getPassword(),userCredentials.getSalt(), clearTextPassword);
+//		}		
+//			return false;
+	}
 }
